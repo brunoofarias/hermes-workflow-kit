@@ -1,0 +1,30 @@
+# Local deployment inputs
+deployment.json
+deployment.local.json
+*.local.json
+
+# Generated artifacts
+build/
+dist/
+
+# Hermes runtime and secrets
+.env
+.env.*
+!.env.EXAMPLE
+auth.json
+state.db
+*.db
+*.db-*
+logs/
+sessions/
+memories/
+company-auth/
+*.zip
+*.tar.gz
+
+# Python/editor noise
+__pycache__/
+*.py[cod]
+.DS_Store
+.idea/
+.vscode/

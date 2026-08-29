@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "deployment": {
+    "slug": "example-engineering",
+    "display_name": "Example Engineering Workflow",
+    "version": "0.1.0",
+    "author": "Workflow Maintainer",
+    "license": "Apache-2.0",
+    "hermes_requires": ">=0.20.3",
+    "reviewer_label": "designated human reviewer",
+    "agent_language": "English",
+    "model": {
+      "provider": "openai-codex",
+      "name": "gpt-5.6-sol",
+      "reasoning_effort": "high"
+    },
+    "limits": {
+      "max_in_progress": 6,
+      "max_in_progress_per_profile": 1,
+      "failure_limit": 2
+    }
+  },
+  "organizations": [
+    {
+      "slug": "example-company",
+      "display_name": "Example Company",
+      "profile_prefix": "example",
+      "board": {
+        "slug": "example-company",
+        "name": "Example Company",
+        "description": "Isolated engineering workflow for Example Company",
+        "icon": "E",
+        "color": "#2563eb"
+      },
+      "additional_environment_requirements": [
+        {
+          "name": "OPTIONAL_TICKET_API_URL",
+          "description": "Optional API base URL for the organization's ticket system",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

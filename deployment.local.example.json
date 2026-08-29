@@ -1,0 +1,12 @@
+{
+  "organizations": {
+    "example-company": {
+      "HWF_WORKSPACE_ROOTS": "/path/to/company/workspaces",
+      "HWF_REPOSITORY_SCOPES": "example-company",
+      "HWF_TOOL_CONTEXT": "Use only locally authenticated Git, cloud and executor contexts dedicated to this organization.",
+      "HWF_DEPLOY_POLICY": "Agents never approve, merge, mutate infrastructure or deploy. The designated reviewer performs those actions.",
+      "HWF_SOURCE_SYSTEM": "Cards originate in the organization's ticket system; links are context only and agents do not update it.",
+      "OPTIONAL_TICKET_API_URL": ""
+    }
+  }
+}
