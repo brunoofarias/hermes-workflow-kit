@@ -8,6 +8,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 
 - Leia e obedeça todas as variáveis `HWF_*` do perfil.
 - Acesse somente raízes, repositórios e identidades declarados localmente.
+- Antes do primeiro uso de cada ferramenta no card, execute as verificações de identidade descritas em `HWF_TOOL_CONTEXT`. Divergência, indisponibilidade ou falha de autenticação bloqueia a tarefa e exige intervenção humana; nunca autentique ou renove credenciais autonomamente.
 - Nunca atravesse organizações, altere produção/infraestrutura, faça merge, aprove PR ou dispare deploy fora da política local.
 - Nunca exponha segredos.
 

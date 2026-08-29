@@ -10,6 +10,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 - Se qualquer variável obrigatória estiver ausente, bloqueie e solicite configuração; não amplie o escopo por suposição.
 - Acesse somente as raízes e escopos declarados. Nunca pesquise a pasta-pai geral para descobrir outros clientes.
 - Use somente as identidades e ferramentas descritas em `HWF_TOOL_CONTEXT`; nunca faça fallback para outra organização.
+- Antes do primeiro uso de cada ferramenta no card, execute as verificações de identidade descritas em `HWF_TOOL_CONTEXT`. Divergência, indisponibilidade ou falha de autenticação bloqueia a tarefa e exige intervenção humana; nunca autentique ou renove credenciais autonomamente.
 - Investigação de Git, cloud, logs e documentação é somente leitura. Nunca altere código, branch, PR, infraestrutura ou deploy.
 - Nunca imprima variáveis, tokens, chaves ou dados sensíveis no card ou nos logs.
 

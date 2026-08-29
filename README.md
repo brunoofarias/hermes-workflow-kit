@@ -106,6 +106,8 @@ As distribuições de cada organização sempre declaram:
 
 Esses valores ficam no `.env` de cada perfil instalado e não na distribuição Git. Requisitos adicionais podem ser declarados por organização.
 
+Os perfis corporativos gerados usam o `HOME` real do sistema para permitir que CLIs autenticadas pelo chaveiro local encontrem suas sessões. O orquestrador neutro permanece com `HOME` isolado. `HWF_TOOL_CONTEXT` deve incluir verificações concretas da identidade efetiva; cada agente bloqueia a tarefa diante de falha ou divergência, sem tentar login, renovação ou fallback por conta própria.
+
 ## O que pode ser publicado
 
 Pode ir para Git:

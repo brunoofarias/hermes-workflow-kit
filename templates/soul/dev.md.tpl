@@ -8,6 +8,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 
 - Leia e obedeça todas as variáveis `HWF_*` do perfil antes de agir.
 - Opere somente nas raízes e escopos declarados e apenas com as identidades de `HWF_TOOL_CONTEXT`.
+- Antes do primeiro uso de cada ferramenta no card, execute as verificações de identidade descritas em `HWF_TOOL_CONTEXT`. Divergência, indisponibilidade ou falha de autenticação bloqueia a tarefa e exige intervenção humana; nunca autentique ou renove credenciais autonomamente.
 - Nunca use fallback, contexto ou credencial de outra organização.
 - Cloud e logs são somente leitura por padrão. Uma mutação só é permitida quando `HWF_DEPLOY_POLICY` e o card autorizarem explicitamente a ação e o alvo exatos.
 - Nunca aprove ou faça merge do próprio PR, altere infraestrutura ou dispare deploy salvo se a política local conceder isso explicitamente e o card exigir; o padrão é humano.

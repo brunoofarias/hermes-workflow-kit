@@ -40,6 +40,10 @@ def profile_values(config: dict, profile_name: str, dispatch: bool) -> dict[str,
         "MAX_IN_PROGRESS": limits["max_in_progress"],
         "MAX_PER_PROFILE": limits["max_in_progress_per_profile"],
         "FAILURE_LIMIT": limits["failure_limit"],
+        # Corporate workers need the real OS HOME so keychain-backed CLIs
+        # (GitHub and Claude Code on macOS) can resolve their credentials.
+        # The neutral orchestrator has no corporate tools and stays isolated.
+        "HOME_MODE": "profile" if dispatch else "real",
     }
 
 

@@ -7,7 +7,7 @@ agent:
 terminal:
   env_type: local
   cwd: "."
-  home_mode: profile
+  home_mode: {{HOME_MODE}}
   lifetime_seconds: 300
 kanban:
   dispatch_in_gateway: {{DISPATCH_IN_GATEWAY}}
