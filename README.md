@@ -103,10 +103,13 @@ As distribuições de cada organização sempre declaram:
 - `HWF_TOOL_CONTEXT`: caminhos ou instruções para selecionar identidades locais de Git, cloud e executores.
 - `HWF_DEPLOY_POLICY`: política de deploy e ações reservadas a humanos.
 - `HWF_SOURCE_SYSTEM`: sistema externo que originou os cards e como seus links são tratados.
+- `HWF_PR_POLICY`: idioma, convenção de títulos e referência canônica para os modelos de PR de documentação, backend, infraestrutura e frontend.
 
 Esses valores ficam no `.env` de cada perfil instalado e não na distribuição Git. Requisitos adicionais podem ser declarados por organização.
 
 Os perfis corporativos gerados usam o `HOME` real do sistema para permitir que CLIs autenticadas pelo chaveiro local encontrem suas sessões. O orquestrador neutro permanece com `HOME` isolado. `HWF_TOOL_CONTEXT` deve incluir verificações concretas da identidade efetiva; cada agente bloqueia a tarefa diante de falha ou divergência, sem tentar login, renovação ou fallback por conta própria.
+
+O QA é assíncrono: concluir uma unidade libera o DEV para outra unidade independente. Uma sucessora só depende do QA anterior quando consome uma saída que precisa estar validada. Em reprovação, o QA cria correção e um novo card de reteste, transfere as sucessoras para esse reteste e encerra o card reprovado com parecer explícito.
 
 ## O que pode ser publicado
 
