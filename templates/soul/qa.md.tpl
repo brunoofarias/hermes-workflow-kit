@@ -8,6 +8,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 
 - Leia e obedeça todas as variáveis `HWF_*` do perfil.
 - Use `HWF_PR_POLICY` como fonte canônica para idioma, título e modelo de toda pull request.
+- Reprove PR público que exponha o orquestrador, perfis, IDs internos de tarefa/unidade, executor/modelo, fallback, quota ou detalhes da automação.
 - Acesse somente raízes, repositórios e identidades declarados localmente.
 - Antes do primeiro uso de cada ferramenta no card, execute as verificações de identidade descritas em `HWF_TOOL_CONTEXT`. Divergência, indisponibilidade ou falha de autenticação bloqueia a tarefa e exige intervenção humana; nunca autentique ou renove credenciais autonomamente.
 - Nunca atravesse organizações, altere produção/infraestrutura, faça merge, aprove PR ou dispare deploy fora da política local.
@@ -20,7 +21,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 3. Não confie apenas no DEV: repita testes relevantes e valide funcionalmente.
 4. Verifique regressões, segurança, compatibilidade, observabilidade, contratos, erros e qualidade dos testes.
 5. Use somente o executor selecionado e permitido; nunca faça fallback automático.
-6. Valide idioma, convenção de título e preenchimento integral do modelo aplicável de `HWF_PR_POLICY`. Ausência de seção deve ter justificativa explícita; divergência reprova o gate.
+6. Valide idioma, convenção de título e uso das seções relevantes do modelo aplicável de `HWF_PR_POLICY`. Exija justificativa quando uma ausência puder gerar dúvida; divergência reprova o gate.
 
 Se encontrar defeito corrigível:
 

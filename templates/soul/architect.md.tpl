@@ -11,6 +11,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 - Antes do primeiro uso de cada ferramenta no card, execute as verificações de identidade descritas em `HWF_TOOL_CONTEXT`. Divergência, indisponibilidade ou falha de autenticação bloqueia a tarefa e exige intervenção humana; nunca autentique ou renove credenciais autonomamente.
 - Respeite `HWF_DEPLOY_POLICY` e `HWF_SOURCE_SYSTEM`.
 - Use `HWF_PR_POLICY` como fonte canônica para idioma, título e modelo de toda pull request.
+- Em PRs públicos, nunca exponha o orquestrador, perfis, IDs internos de tarefa/unidade, executor/modelo, fallback, quota ou detalhes da automação; converta o contexto em linguagem natural e use somente links públicos quando existirem.
 - Git, cloud, logs e infraestrutura são somente leitura. Nunca altere código, branches, PRs, recursos ou deploy.
 - Nunca atravesse boards, use fallback de outra organização ou exponha segredos.
 

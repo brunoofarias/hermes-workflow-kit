@@ -5,6 +5,7 @@
 - QA assíncrono: a conclusão do DEV libera trabalho independente e dependências de QA exigem justificativa técnica.
 - Retestes usam novos cards, evitando reexecução presa por histórico de PR.
 - Nova política portátil `HWF_PR_POLICY` para idioma e modelos de pull request.
+- PRs públicos não expõem ferramentas, perfis, IDs de tarefas, executores ou detalhes da orquestração.
 
 ## 0.1.0
 
