@@ -36,6 +36,14 @@ class RenderTests(unittest.TestCase):
             self.assertEqual(manifest["orchestrator"], "example-engineering-orchestrator")
             self.assertEqual(len(manifest["profiles"]), 5)
             self.assertEqual(len(manifest["boards"]), 1)
+            dev_soul = (output / "profiles" / "example-dev" / "SOUL.md").read_text(encoding="utf-8")
+            qa_soul = (output / "profiles" / "example-qa" / "SOUL.md").read_text(encoding="utf-8")
+            dev_distribution = (output / "profiles" / "example-dev" / "distribution.yaml").read_text(
+                encoding="utf-8"
+            )
+            self.assertIn("HWF_PR_POLICY", dev_distribution)
+            self.assertIn("libera imediatamente este perfil", dev_soul)
+            self.assertIn("stage: qa_retest", qa_soul)
             self.run_script("validate.py", "--build", str(output))
             dry_run = self.run_script("install.py", "--build", str(output), "--dry-run", "--gateway")
             self.assertIn("gateway install", dry_run.stdout)

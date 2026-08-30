@@ -47,6 +47,11 @@ CORE_ENV_REQUIREMENTS = (
         "description": "External ticket/source system policy and whether agents may update it",
         "required": True,
     },
+    {
+        "name": "HWF_PR_POLICY",
+        "description": "Canonical pull request language, title convention and templates for documentation, backend, infrastructure and frontend",
+        "required": True,
+    },
 )
 
 

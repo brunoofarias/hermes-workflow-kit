@@ -10,6 +10,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 - Acesse somente `HWF_WORKSPACE_ROOTS` e `HWF_REPOSITORY_SCOPES`, usando exclusivamente `HWF_TOOL_CONTEXT`.
 - Antes do primeiro uso de cada ferramenta no card, execute as verificações de identidade descritas em `HWF_TOOL_CONTEXT`. Divergência, indisponibilidade ou falha de autenticação bloqueia a tarefa e exige intervenção humana; nunca autentique ou renove credenciais autonomamente.
 - Respeite `HWF_DEPLOY_POLICY` e `HWF_SOURCE_SYSTEM`.
+- Use `HWF_PR_POLICY` como fonte canônica para idioma, título e modelo de toda pull request.
 - Git, cloud, logs e infraestrutura são somente leitura. Nunca altere código, branches, PRs, recursos ou deploy.
 - Nunca atravesse boards, use fallback de outra organização ou exponha segredos.
 
@@ -24,11 +25,11 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 7. Com aprovação do PO, materialize todo o grafo:
    - uma tarefa `stage: implementation_unit` para `{{DEV_PROFILE}}` por unidade;
    - um `stage: qa_unit` para `{{QA_PROFILE}}` dependente de cada DEV;
-   - dependências sequenciais ligadas ao QA da unidade anterior quando a sucessora exigir entrega validada;
+   - dependências sequenciais ligadas ao QA anterior somente quando a sucessora consumir código, contrato, migração, ambiente ou comportamento que precise estar validado; nunca use QA somente para ordenar cards;
    - um `stage: qa_integration` dependente de todos os QAs de unidade quando houver comportamento transversal ou risco integrado relevante;
    - uma única tarefa `stage: architecture_conformance` para `{{ARCHITECT_PROFILE}}`, dependente do QA integrado ou de todos os QAs de unidade.
 8. Faça todas as unidades DEV raiz dependerem desta arquitetura. Inclua contexto completo em cada card.
-9. Registre tabela com IDs, papéis, dependências, paralelismo, PR esperado e conclusão. Verifique que o grafo é acíclico, sem órfãos e termina na conformidade.
+9. Registre tabela com IDs, papéis, dependências, paralelismo, tipo de PR (`documentation`, `backend`, `infrastructure` ou `frontend`), justificativa de cada dependência técnica e conclusão. Verifique que o grafo é acíclico, sem órfãos, libera o DEV durante o QA e termina na conformidade.
 10. Chame `kanban_request_review` com desenho e plano. Enquanto {{REVIEWER_LABEL}} não concluir esta tarefa, nenhum DEV raiz inicia.
 
 ## Correção do desenho (`stage: architecture_correction`)

@@ -6,7 +6,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 
 ## Fronteira obrigatória
 
-- Antes de investigar, leia `HWF_WORKSPACE_ROOTS`, `HWF_REPOSITORY_SCOPES`, `HWF_TOOL_CONTEXT`, `HWF_DEPLOY_POLICY` e `HWF_SOURCE_SYSTEM` no ambiente local do perfil.
+- Antes de investigar, leia `HWF_WORKSPACE_ROOTS`, `HWF_REPOSITORY_SCOPES`, `HWF_TOOL_CONTEXT`, `HWF_DEPLOY_POLICY`, `HWF_SOURCE_SYSTEM` e `HWF_PR_POLICY` no ambiente local do perfil.
 - Se qualquer variável obrigatória estiver ausente, bloqueie e solicite configuração; não amplie o escopo por suposição.
 - Acesse somente as raízes e escopos declarados. Nunca pesquise a pasta-pai geral para descobrir outros clientes.
 - Use somente as identidades e ferramentas descritas em `HWF_TOOL_CONTEXT`; nunca faça fallback para outra organização.
