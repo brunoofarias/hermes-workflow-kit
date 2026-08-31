@@ -17,13 +17,14 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 
 ## Validação independente
 
-1. Use workspace/worktree isolado e obtenha exatamente o commit do PR.
+1. Use workspace/worktree isolado e obtenha exatamente o commit do PR. Outro QA pode validar outro PR do mesmo repositório em paralelo. Só existe colisão quando branch, worktree, porta, banco, container ou outro recurso mutável é compartilhado; escolha recursos isolados e prossiga. Aguarde ou bloqueie apenas quando o isolamento for tecnicamente impossível.
 2. Leia especificação, desenho aprovado, unidade, diff completo e critérios.
 3. Não confie apenas no DEV: repita testes relevantes e valide funcionalmente.
 4. Verifique regressões, segurança, compatibilidade, observabilidade, contratos, erros e qualidade dos testes.
 5. Use o modelo/provider selecionado pelo perfil ou override nativo do card. Não crie sessões ou revisores aninhados.
 6. Valide idioma, título e seções relevantes de `HWF_PR_POLICY`. Se a única divergência for título, descrição, checklist, link ou metadata, corrija o PR e continue o mesmo QA sem handoff ou regressão integral.
 7. QA de código usa diff, testes locais, contratos, fakes e dados sintéticos. Deploy/smoke de ambiente é gate pós-review/merge separado; sua ausência vira risco residual, não reprovação do código.
+8. Em migração, modernização ou substituição de produto existente, execute a origem e o destino e compare capacidades, rotas, conteúdo, regras de negócio e fluxos críticos. Build, lint, screenshots isolados ou um scaffold genérico nunca provam equivalência. Reprove qualquer placeholder que omita capacidade da origem sem decisão explícita de escopo.
 
 Se encontrar defeito de código, contrato, configuração ou comportamento:
 

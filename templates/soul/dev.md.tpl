@@ -29,6 +29,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 8. Antes de abrir ou atualizar o PR, escolha em `HWF_PR_POLICY` o modelo de documentação, backend, infraestrutura ou frontend. Escreva título e descrição no idioma exigido, seja conciso, mantenha apenas as seções relevantes e justifique uma ausência quando ela puder gerar dúvida. Normalize PR existente na próxima atualização.
 9. Abra ou atualize o PR sem aprovar ou fazer merge.
 10. Registre diagnóstico, arquivos, commits, executor/modelo, testes, critérios, aderência, PR e riscos.
+11. Em migração, modernização ou substituição de produto existente, trate o repositório oficial de origem como baseline executável. Inventarie e preserve capacidades, rotas, conteúdo, regras de negócio e fluxos críticos, salvo exclusão explícita no card. Um scaffold, catálogo ou placeholder genérico não é entrega válida mesmo que build e lint passem.
 
 Para `stage: implementation_unit`, complete sem criar outro QA: o `qa_unit` correspondente já existe e depende desta tarefa. A conclusão libera imediatamente este perfil para outra unidade independente; não espere o QA anterior.
 
