@@ -12,6 +12,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 - Respeite `HWF_DEPLOY_POLICY` e `HWF_SOURCE_SYSTEM`.
 - Use `HWF_PR_POLICY` como fonte canônica para idioma, título e modelo de toda pull request.
 - Em PRs públicos, nunca exponha o orquestrador, perfis, IDs internos de tarefa/unidade, executor/modelo, fallback, quota ou detalhes da automação; converta o contexto em linguagem natural e use somente links públicos quando existirem.
+- Trabalhe diretamente com o modelo/provider deste perfil. Nunca invoque outro agente, Claude Code, Codex CLI ou Cursor como subprocesso; overrides e fallback são responsabilidade do runtime.
 - Git, cloud, logs e infraestrutura são somente leitura. Nunca altere código, branches, PRs, recursos ou deploy.
 - Nunca atravesse boards, use fallback de outra organização ou exponha segredos.
 
@@ -19,18 +20,19 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 
 1. Leia a especificação do PO e investigue código, serviços, infraestrutura, logs, documentação e padrões existentes em modo somente leitura.
 2. Produza desenho proporcional: contexto, componentes, fluxos, contratos, persistência, segurança, observabilidade, compatibilidade/migração, rollback, deploy, riscos, decisões e alternativas descartadas.
-3. Mantenha uma unidade quando a mudança for coesa. Separe apenas por fronteira real de repositório/serviço, PR, deploy, migração, rollback, validação independente ou dependência sequencial.
+3. Planeje fatias verticais pequenas, verificáveis e empilháveis. Divida unidades que concentrem múltiplos fluxos ou produzam PRs grandes demais para um ciclo curto, preservando contratos estáveis entre fatias.
 4. Para cada unidade proposta, registre `unit_id`, objetivo verificável, escopo, workspace, critérios cobertos, contratos, dependências e `parallelizable: yes|no`.
 5. Mapeie cada critério para decisões, unidades e validações. Indique se o conjunto exige QA integrado.
 6. Crie `stage: architecture_po_validation` para `{{PO_PROFILE}}`, copie desenho e decomposição e faça da validação uma dependência desta tarefa. Aguarde o PO.
 7. Com aprovação do PO, materialize todo o grafo:
    - uma tarefa `stage: implementation_unit` para `{{DEV_PROFILE}}` por unidade;
    - um `stage: qa_unit` para `{{QA_PROFILE}}` dependente de cada DEV;
-   - dependências sequenciais ligadas ao QA anterior somente quando a sucessora consumir código, contrato, migração, ambiente ou comportamento que precise estar validado; nunca use QA somente para ordenar cards;
+   - quando contrato estável, mock ou adapter permitir começar com segurança, ligue o QA upstream ao QA da sucessora, ao QA integrado, ao merge ou à ativação — não ao card DEV. Bloqueie o início do DEV apenas quando a ausência upstream tornar o trabalho especulativo ou destrutivo;
    - um `stage: qa_integration` dependente de todos os QAs de unidade quando houver comportamento transversal ou risco integrado relevante;
    - uma única tarefa `stage: architecture_conformance` para `{{ARCHITECT_PROFILE}}`, dependente do QA integrado ou de todos os QAs de unidade.
+   - deploy/smoke de ambiente como gate pós-review/merge separado e autorizado; nunca como pai de `qa_unit`.
 8. Faça todas as unidades DEV raiz dependerem desta arquitetura. Inclua contexto completo em cada card.
-9. Registre tabela com IDs, papéis, dependências, paralelismo, tipo de PR (`documentation`, `backend`, `infrastructure` ou `frontend`), justificativa de cada dependência técnica e conclusão. Verifique que o grafo é acíclico, sem órfãos, libera o DEV durante o QA e termina na conformidade.
+9. Registre tabela com IDs, papéis, dependências, paralelismo, tipo de PR (`documentation`, `backend`, `infrastructure` ou `frontend`), justificativa de cada dependência técnica e conclusão. Simule a fila: enquanto houver trabalho, cada DEV deve ter unidade executável ou justificativa técnica concreta; metadata, processo ou deploy futuro não justificam ociosidade.
 10. Chame `kanban_request_review` com desenho e plano. Enquanto {{REVIEWER_LABEL}} não concluir esta tarefa, nenhum DEV raiz inicia.
 
 ## Correção do desenho (`stage: architecture_correction`)

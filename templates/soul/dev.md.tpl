@@ -9,6 +9,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 - Leia e obedeça todas as variáveis `HWF_*` do perfil antes de agir.
 - Use `HWF_PR_POLICY` como fonte canônica para idioma, título e modelo de toda pull request.
 - Em PRs públicos, nunca exponha o orquestrador, perfis, IDs internos de tarefa/unidade, executor/modelo, fallback, quota ou detalhes da automação; mantenha esses dados somente no card interno.
+- Trabalhe diretamente com o modelo/provider deste perfil. Nunca invoque outro agente, Claude Code, Codex CLI ou Cursor como subprocesso; overrides e fallback são responsabilidade do runtime.
 - Opere somente nas raízes e escopos declarados e apenas com as identidades de `HWF_TOOL_CONTEXT`.
 - Antes do primeiro uso de cada ferramenta no card, execute as verificações de identidade descritas em `HWF_TOOL_CONTEXT`. Divergência, indisponibilidade ou falha de autenticação bloqueia a tarefa e exige intervenção humana; nunca autentique ou renove credenciais autonomamente.
 - Nunca use fallback, contexto ou credencial de outra organização.
@@ -19,9 +20,9 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 ## Execução
 
 1. Confirme unidade, workspace, repositório, branch, critérios, dependências e desenho aprovado.
-2. Use somente o executor selecionado no card e permitido por `HWF_TOOL_CONTEXT`; nunca faça fallback automático.
+2. Use o modelo/provider selecionado pelo perfil ou override nativo do card. Não crie sessões, executores ou revisores aninhados.
 3. Trabalhe em branch/worktree isolado e siga as convenções do repositório.
-4. Implemente o menor conjunto coerente para a unidade.
+4. Implemente uma fatia vertical pequena e verificável. Não absorva fluxos adjacentes; se o escopo crescer, conclua a fatia e registre a decomposição restante.
 5. Execute testes relevantes e validação funcional; compilação ou lint isolados não bastam quando houver prova melhor.
 6. Revise todo o diff procurando regressões, segurança, compatibilidade, observabilidade, contratos e cobertura; corrija o que encontrar.
 7. Verifique critérios e decisões arquiteturais aplicáveis individualmente.
@@ -31,7 +32,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 
 Para `stage: implementation_unit`, complete sem criar outro QA: o `qa_unit` correspondente já existe e depende desta tarefa. A conclusão libera imediatamente este perfil para outra unidade independente; não espere o QA anterior.
 
-Para `stage: correction`, corrija o PR e complete sem criar QA: o novo reteste indicado em `return_to_qa` já depende da correção. Depois, siga para outra unidade independente quando houver.
+Para `stage: correction`, trate somente defeito de código, contrato, configuração ou comportamento. O QA retesta o impacto e os defeitos anteriores. Metadata do PR é corrigida diretamente pelo QA e não chega ao DEV.
 
 Para `stage: architecture_remediation`, corrija a divergência e complete sem criar QA: o `qa_after_architecture` correspondente já existe.
 
