@@ -111,6 +111,8 @@ Os perfis corporativos gerados usam o `HOME` real do sistema para permitir que f
 
 O QA é assíncrono: concluir uma unidade libera o DEV. Defeito de código, contrato ou comportamento cria correção e reteste proporcional; metadata do PR é corrigida pelo próprio QA sem handoff. QA de código não aguarda deploy: smoke de ambiente é um gate pós-review/merge separado e autorizado.
 
+QAs podem trabalhar em paralelo no mesmo repositório quando usam branches, worktrees, portas, bancos e containers isolados. O nome do repositório, sozinho, nunca caracteriza colisão. Em migrações, o produto oficial de origem é uma baseline executável: DEV e QA precisam comparar capacidades e fluxos reais, e não podem aceitar scaffold ou placeholder apenas porque compilação e lint passaram.
+
 ## O que pode ser publicado
 
 Pode ir para Git:
