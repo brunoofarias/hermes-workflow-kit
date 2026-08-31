@@ -19,7 +19,7 @@ PO
   -> review humano final
 ```
 
-Uma mudança coesa permanece em uma unidade. O arquiteto só decompõe por fronteiras reais: repositório, serviço, PR, deploy, migração, rollback, validação independente ou dependência sequencial.
+O arquiteto produz fatias verticais pequenas, verificáveis e empilháveis. Contratos estáveis e mocks liberam implementação em paralelo; QAs upstream continuam bloqueando QA integrado, merge e ativação, não o início seguro do desenvolvimento.
 
 ## Requisitos
 
@@ -100,16 +100,16 @@ As distribuições de cada organização sempre declaram:
 
 - `HWF_WORKSPACE_ROOTS`: raízes locais permitidas, separadas pelo delimitador apropriado da plataforma.
 - `HWF_REPOSITORY_SCOPES`: organizações, grupos ou namespaces Git permitidos.
-- `HWF_TOOL_CONTEXT`: caminhos ou instruções para selecionar identidades locais de Git, cloud e executores.
+- `HWF_TOOL_CONTEXT`: caminhos ou instruções para selecionar identidades locais de Git e cloud e validar o provedor do perfil.
 - `HWF_DEPLOY_POLICY`: política de deploy e ações reservadas a humanos.
 - `HWF_SOURCE_SYSTEM`: sistema externo que originou os cards e como seus links são tratados.
 - `HWF_PR_POLICY`: idioma, convenção de títulos e referência canônica para os modelos de PR de documentação, backend, infraestrutura e frontend.
 
 Esses valores ficam no `.env` de cada perfil instalado e não na distribuição Git. Requisitos adicionais podem ser declarados por organização.
 
-Os perfis corporativos gerados usam o `HOME` real do sistema para permitir que CLIs autenticadas pelo chaveiro local encontrem suas sessões. O orquestrador neutro permanece com `HOME` isolado. `HWF_TOOL_CONTEXT` deve incluir verificações concretas da identidade efetiva; cada agente bloqueia a tarefa diante de falha ou divergência, sem tentar login, renovação ou fallback por conta própria.
+Os perfis corporativos gerados usam o `HOME` real do sistema para permitir que ferramentas autenticadas pelo chaveiro local encontrem suas sessões. O orquestrador neutro permanece com `HOME` isolado. `HWF_TOOL_CONTEXT` deve incluir verificações concretas da identidade efetiva; cada agente bloqueia a tarefa diante de falha ou divergência, sem tentar login ou renovação por conta própria. Cada perfil executa diretamente com seu modelo/provider; agentes e CLIs aninhados são proibidos.
 
-O QA é assíncrono: concluir uma unidade libera o DEV para outra unidade independente. Uma sucessora só depende do QA anterior quando consome uma saída que precisa estar validada. Em reprovação, o QA cria correção e um novo card de reteste, transfere as sucessoras para esse reteste e encerra o card reprovado com parecer explícito.
+O QA é assíncrono: concluir uma unidade libera o DEV. Defeito de código, contrato ou comportamento cria correção e reteste proporcional; metadata do PR é corrigida pelo próprio QA sem handoff. QA de código não aguarda deploy: smoke de ambiente é um gate pós-review/merge separado e autorizado.
 
 ## O que pode ser publicado
 

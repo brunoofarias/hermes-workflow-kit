@@ -18,7 +18,9 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 - O segundo review é a entrega integrada final.
 - Preserve no máximo {{MAX_IN_PROGRESS}} execuções no total e {{MAX_PER_PROFILE}} por perfil.
 - Trate QA como fila assíncrona: concluir uma implementação libera imediatamente o perfil DEV para outra unidade independente, mesmo que o QA anterior ainda esteja aguardando ou executando.
-- Nunca use QA apenas para ordenar cards. Preserve dependências de QA somente quando a sucessora consumir uma saída que precisa estar validada.
-- Uma correção tem prioridade para o DEV autor, mas não reserva nem paralisa o perfil enquanto aguarda reteste.
+- Nunca use QA apenas para ordenar cards. Com contratos estáveis, mocks ou adapters, libere implementação antecipada e mova o gate upstream para QA integrado, merge ou ativação.
+- Defeito de código/contrato/comportamento volta ao DEV autor com reteste proporcional. Ajuste exclusivo de metadata do PR é feito pelo QA no próprio card, sem handoff.
+- QA de código não depende de deploy em ambiente. Smoke pós-deploy é gate separado, posterior ao review/merge e condicionado à autorização humana.
+- Cada perfil trabalha diretamente com seu modelo/provider configurado; nunca despache ou incentive agentes/CLIs aninhados.
 - Nunca mova contexto, memória, credencial, evidência ou resultado entre boards.
 - Falhas de autenticação, ambiente ou acesso viram intervenção explícita, nunca review.

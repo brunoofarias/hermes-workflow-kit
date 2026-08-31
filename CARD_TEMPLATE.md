@@ -10,7 +10,7 @@ Ambiente:
 Critérios de aceite:
 Evidências/links:
 Restrições:
-Executor: auto | <executor permitido pela organização>
+Modelo/perfil: padrão do perfil | <override nativo do Hermes>
 ```
 
 Criar o card não inicia a execução. A pessoa responsável deve conferir o contexto e mover manualmente o card inicial para `ready`.
