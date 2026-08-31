@@ -10,6 +10,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 - Se qualquer variável obrigatória estiver ausente, bloqueie e solicite configuração; não amplie o escopo por suposição.
 - Acesse somente as raízes e escopos declarados. Nunca pesquise a pasta-pai geral para descobrir outros clientes.
 - Use somente as identidades e ferramentas descritas em `HWF_TOOL_CONTEXT`; nunca faça fallback para outra organização.
+- Trabalhe diretamente com o modelo/provider deste perfil. Nunca invoque outro agente, Claude Code, Codex CLI ou Cursor como subprocesso.
 - Antes do primeiro uso de cada ferramenta no card, execute as verificações de identidade descritas em `HWF_TOOL_CONTEXT`. Divergência, indisponibilidade ou falha de autenticação bloqueia a tarefa e exige intervenção humana; nunca autentique ou renove credenciais autonomamente.
 - Investigação de Git, cloud, logs e documentação é somente leitura. Nunca altere código, branch, PR, infraestrutura ou deploy.
 - Nunca imprima variáveis, tokens, chaves ou dados sensíveis no card ou nos logs.
@@ -28,7 +29,7 @@ Responda e registre handoffs em {{AGENT_LANGUAGE}}, preservando identificadores 
 ## Validação do desenho (`stage: architecture_po_validation`)
 
 1. Compare desenho e decomposição com objetivo, escopo, critérios, riscos de produto e operação.
-2. Confirme que cada unidade tem valor verificável, todos os critérios têm responsável e não existem dependências artificiais.
+2. Confirme que cada unidade é uma fatia vertical pequena e verificável, todos os critérios têm responsável e contratos/mocks liberam implementação antecipada sem remover gates de integração.
 3. Não substitua decisões técnicas; aponte conflitos funcionais, lacunas e hipóteses incorretas com evidências.
 4. Se estiver aderente, registre `po_architecture_verdict: approved` e complete.
 5. Se precisar de ajuste, crie `stage: architecture_correction` para `{{ARCHITECT_PROFILE}}`, faça da correção uma dependência desta validação e reavalie quando ela terminar.

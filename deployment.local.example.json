@@ -3,7 +3,7 @@
     "example-company": {
       "HWF_WORKSPACE_ROOTS": "/path/to/company/workspaces",
       "HWF_REPOSITORY_SCOPES": "example-company",
-      "HWF_TOOL_CONTEXT": "Use only locally authenticated Git, cloud and executor contexts dedicated to this organization. Before first use in every task, verify the effective Git user, cloud account/tenant and executor organization; block and request intervention on any mismatch or authentication failure.",
+      "HWF_TOOL_CONTEXT": "Use only locally authenticated Git and cloud contexts dedicated to this organization and the model/provider configured in the Hermes profile. Before first use in every task, verify the effective Git user and cloud account/tenant; block on mismatch. Never invoke another coding agent or CLI as a subprocess.",
       "HWF_DEPLOY_POLICY": "Agents never approve, merge, mutate infrastructure or deploy. The designated reviewer performs those actions.",
       "HWF_SOURCE_SYSTEM": "Cards originate in the organization's ticket system; links are context only and agents do not update it.",
       "HWF_PR_POLICY": "Write pull request titles and descriptions in the organization's language. Use the canonical documentation, backend, infrastructure or frontend template published by the organization; keep only relevant sections and justify an omission when it could cause ambiguity. Never expose internal orchestration, profiles, task IDs, executors, models, fallbacks or quotas in a public pull request.",
